@@ -1,4 +1,5 @@
 .subscribe{
+    font-family: var(--Montserrat);
     align-items: center;
     background-color: var(--fifth) ;
     flex-direction: column;

@@ -13,10 +13,7 @@ const Hero = () => {
           <span>on everything</span>
         </h1>
         <p className={Styles.introduction__text}>
-          I Will Explain That There Will Be Times Of Praise For Some People, And
-          They Will Run Away From Those Great Things Here? To Be Said To Be
-          Something, The Error Of Rejecting Them, Avoids Trouble, Forgives, Or
-          Repels The Selected Architect Of The Truth, Hinders The Way To Follow.
+          check out the latest sales!
         </p>
         <button className="btn-primary text-bold">
           <Link href="/#products">

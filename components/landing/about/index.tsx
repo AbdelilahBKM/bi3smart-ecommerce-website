@@ -8,7 +8,7 @@ import Card from "./card";
 const About = () => {
   return (
     <section className={Styles.about} id="about">
-      <h2 className={`text-center ${Styles.about__title}`}>why shop with us</h2>
+      <h2 className={`text-center ${Styles.about__title}`}>why shop with us?</h2>
       <div className={`flex ${Styles.about__container}`}>
         <Card
           title="fast delivery"

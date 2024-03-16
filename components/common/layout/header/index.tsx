@@ -17,12 +17,13 @@ const Header = () => {
       <nav className={`${Styles.nav} flex`}>
         <Link href="/">
           <a>
-            <Image
+            {/* <Image
               src={logo}
               alt="the website logo"
               width={250}
               height={43.31}
-            />
+            /> */}
+            <p className={`${Styles.logo}`}><span className={`${Styles.red}`}>BI3</span>-SMART</p>
           </a>
         </Link>
         <ul className={`flex ${Styles.nav__list}`}>

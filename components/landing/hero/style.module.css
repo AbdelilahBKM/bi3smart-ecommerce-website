@@ -1,12 +1,14 @@
 .hero{
- background-image: url("../../../public/assets/images/tertiary-hero.png"); 
+ /* background-image: url("../../../public/assets/images/tertiary-hero.png"); 
  background-size: cover;
  background-position: top;  
- background-repeat: no-repeat;
+ background-repeat: no-repeat; */
+background-color: #A3E4D7;
  height:550px;
  padding: 6rem 7rem ;
 }
 .introduction{
+    font-family: var(--Montserrat);
     color: var(--primary);
     line-height: 70px;
     max-width: 554px;
@@ -14,13 +16,16 @@
     width:90%;
 }
 .introduction__title{
+    font-family: var(--Montserrat);
     color: var(--fourth);
     font-size: clamp(2.9rem,11vw,4.5rem);
 }
 .introduction__title--firstPart{
+    font-family: var(--Montserrat);
     color: var(--secondary);
 }
 .introduction__text{
+ font-family: var(--Montserrat);
  font-family: var(--Montserrat);
  font-size: .9rem;
  line-height: 26px;
