@@ -1,0 +1,91 @@
+.main {
+    padding-top: 20px;
+    height: 781px;
+    width: 90vw;
+    font-family: var(--Montserrat);
+}
+
+.image {
+    width: 61%;
+    height: 100%;
+    float: left;
+    background-color: #CBE4E8;
+    display: flex;
+    overflow: hidden;
+    border-radius: 3px;
+  }
+  .form-image {
+    width: 805px;
+    height: 706px;
+  }
+  
+  .form {
+    width: 39%;
+    height: 100%;
+    float: right;
+    padding: 0 20px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+  .form .container {
+    width: 370px;
+    height: 530px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+  }
+  .form-header h2 {
+    font-size: 2.3rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  
+  .form-header p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+  
+  .register-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 0px;
+    border-bottom: 1px solid #ccc;
+  }
+  .form__field:focus {
+    outline: none;
+  }
+  .form__group {
+    margin-top: 12px;
+  }
+  .form__field::placeholder {
+    font-size: 1rem;
+    padding-left: 0px;
+  }
+  
+  .register-form input[type="submit"] {
+    background-color: var(--secondary);
+    font-size: 1rem;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 7px;
+    height: 56px;
+    transition: 200ms;
+  }
+  
+  .register-form input[type="submit"]:hover {
+    opacity: .5;
+    
+  }
+  
+  .link {
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+  .login {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+  }
+  
