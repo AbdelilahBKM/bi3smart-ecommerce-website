@@ -161,3 +161,27 @@
   color: #fff;
   background: #007aff;
 }
+
+.products_cat {
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 14px 18px 2px;
+  width: 140px;
+  height: 130px;
+  border-radius: 20px;
+  transition: transform 0.3s ease; /* Adding transition for smooth effect */
+}
+
+.products_cat:hover {
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 20px 24px 2px;
+  transform: scale(1.05); /* Adjusted shadow on hover */
+}
+
+.products_catIMG {
+  border-radius: 20px;
+}
+
+.categoryName {
+  font-size: 17px;
+  font-family: cursive;
+  font-weight: bold;
+}

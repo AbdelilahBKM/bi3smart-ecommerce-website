@@ -7,6 +7,12 @@ module.exports = nextConfig;
 
 module.exports = {
   images: {
-    domains: ["fakestoreapi.com"],
+    domains: [
+      "fakestoreapi.com",
+      "media.product.which.co.uk",
+      "www.next.sg",
+      "st.depositphotos.com",
+      "www.gap.com",
+    ],
   },
 };
