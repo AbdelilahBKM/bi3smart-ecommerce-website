@@ -10,6 +10,7 @@ export default function Register() {
         <Image
           className={Style["form-image"]}
           src={formImage}
+          alt="image"
           width={805}
           height={706}
         />

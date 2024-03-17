@@ -10,6 +10,7 @@ export default function Login() {
         <Image
           className={Style["form-image"]}
           src={formImage}
+          alt="image"
           width={805}
           height={706}
         />
@@ -32,7 +33,7 @@ export default function Login() {
             </div>
           </form>
           <div className={Style.link}>
-            Don't have an Account? <span className={Style.login}><Link href={"/register"}>Register</Link></span>
+            Don&apos;t have an Account?<span className={Style.login}><Link href={"/register"}>Register</Link></span>
           </div>
         </div>
       </div>

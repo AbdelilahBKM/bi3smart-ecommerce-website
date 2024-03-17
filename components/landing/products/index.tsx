@@ -70,7 +70,9 @@ function ProductList() {
           }}
         >
           {categories.map((category, index) => (
-            <Card className={Styles.products_cat}>
+            <Card
+            key={index}
+            className={Styles.products_cat}>
               <Image
                 className={Styles.products_catIMG}
                 src={categoryImages[category]}
