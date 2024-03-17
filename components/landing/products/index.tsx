@@ -30,7 +30,7 @@ function ProductList() {
               key={product.id}
               image={{ src: product.image, alt: product.category }}
               name={product.title}
-              price={`${product.price}`}
+              price={`${product.price}$`}
             />
           ))}
         </div>

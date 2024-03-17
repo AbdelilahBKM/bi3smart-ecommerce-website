@@ -55,6 +55,11 @@ const Header = () => {
               <a className={Styles.nav__link}>about</a>
             </Link>
           </li>
+          <li>
+            <Link href="/register">
+              <a className={Styles.nav__link}>Join now</a>
+            </Link>
+          </li>
           <li className={Styles.shopping__card}>
             <Link href="/checkout">
               <a>
