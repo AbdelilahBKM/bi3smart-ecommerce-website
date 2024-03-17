@@ -1,63 +1,42 @@
-import Title from "../../common/Title";
+"use client";
 import Product from "./product";
 import Styles from "./style.module.css";
-import productImg from "../../../public/assets/images/p1.png";
-import product2Img from "../../../public/assets/images/p2.png";
-import product3Img from "../../../public/assets/images/p3.png";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Title from "../../common/Title";
+import { Products } from "../../../utils/objects";
 
-const Products = () => {
+function ProductList() {
+  const [products, setProducts] = useState<Products[]>([]); // Specify Product[] as the type
+
+  useEffect(() => {
+    axios
+      .get("https://fakestoreapi.com/products")
+      .then((response) => {
+        setProducts(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   return (
-    <section className={Styles.products} id="products">
-      <Title>our products</Title>
-      <div className={`flex ${Styles.products__container}`}>
-        <Product
-          image={{ src: productImg.src, alt: "Men's Shirt Image" }}
-          name="Mens Shirt"
-          price="75$"
-        />
-        <Product
-          image={{ src: product2Img.src, alt: "Men's Shirt Image" }}
-          name="Mens Shirt"
-          price="75$"
-        />
-        <Product
-          image={{ src: product3Img.src, alt: "Women's Dress Image" }}
-          name="Women's Dress"
-          price="85$"
-        />
-        <Product
-          image={{ src: productImg.src, alt: "Men's Shirt Image" }}
-          name="Mens Shirt"
-          price="75$"
-        />
-        <Product
-          image={{ src: product2Img.src, alt: "Men's Shirt Image" }}
-          name="Mens Shirt"
-          price="75$"
-        />
-        <Product
-          image={{ src: product3Img.src, alt: "Women's Dress Image" }}
-          name="Women's Dress"
-          price="85$"
-        />
-        <Product
-          image={{ src: productImg.src, alt: "Men's Shirt Image" }}
-          name="Mens Shirt"
-          price="75$"
-        />
-        <Product
-          image={{ src: product2Img.src, alt: "Men's Shirt Image" }}
-          name="Mens Shirt"
-          price="75$"
-        />
-        <Product
-          image={{ src: product3Img.src, alt: "Women's Dress Image" }}
-          name="Women's Dress"
-          price="85$"
-        />
-      </div>
-    </section>
+    <div>
+      <section className={Styles.products} id="products">
+        <Title>Our Products</Title>
+        <div className={`flex ${Styles.products__container}`}>
+          {products.map((product) => (
+            <Product
+              key={product.id}
+              image={{ src: product.image, alt: product.category }}
+              name={product.title}
+              price={`${product.price}`}
+            />
+          ))}
+        </div>
+      </section>
+    </div>
   );
-};
+}
 
-export default Products;
+export default ProductList;

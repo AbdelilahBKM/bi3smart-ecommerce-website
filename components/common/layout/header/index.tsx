@@ -13,8 +13,8 @@ const Header = () => {
   const { products } = useProductContext();
   const router = useRouter();
   return (
-    <header className={`${Styles.header} `}>
-      <nav className={`${Styles.nav} flex`}>
+    <header className={Styles.header}>
+      <nav className={Styles.nav}>
         <Link href="/">
           <a>
             {/* <Image
@@ -23,7 +23,9 @@ const Header = () => {
               width={250}
               height={43.31}
             /> */}
-            <p className={`${Styles.logo}`}><span className={`${Styles.red}`}>BI3</span>-SMART</p>
+            <p className={`${Styles.logo}`}>
+              <span className={`${Styles.red}`}>BI3</span>-SMART
+            </p>
           </a>
         </Link>
         <ul className={`flex ${Styles.nav__list}`}>
