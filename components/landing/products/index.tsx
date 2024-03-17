@@ -1,4 +1,4 @@
-// import Title from "../../common/Title";
+"use client";
 import Product from "./product";
 import Styles from "./style.module.css";
 import React, { useState, useEffect } from "react";
