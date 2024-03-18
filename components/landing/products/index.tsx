@@ -58,7 +58,11 @@ function ProductList() {
         <Title>Our Products</Title>
         <div className={Styles.categories}>
           {categories.map((category, index) => (
-            <div key={index} className={Styles.products_cat}>
+            <div
+              key={index}
+              className={Styles.products_cat}
+              onClick={() => filterProductsByCategory(category)}
+            >
               <div className={Styles.centerImage}>
                 <Image
                   src={categoryImages[category]}
@@ -66,7 +70,6 @@ function ProductList() {
                   height={56}
                   key={index}
                   className={Styles["product-img"]}
-                  onClick={() => filterProductsByCategory(category)}
                 />
               </div>
               <div className={Styles.categoryName}>{category}</div>
