@@ -13,6 +13,7 @@ module.exports = {
       "www.next.sg",
       "st.depositphotos.com",
       "www.gap.com",
+      "fonts.googleapis.com",
     ],
   },
 };
