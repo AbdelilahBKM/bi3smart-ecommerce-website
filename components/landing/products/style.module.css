@@ -163,6 +163,7 @@
 }
 
 .categories {
+  font-family: var(--Montserrat);
   display: flex;
   justify-content: space-evenly;
   border-bottom: 1px solid #ccc;
@@ -170,21 +171,32 @@
 }
 
 .products_cat {
+  position: relative;
   cursor: pointer;
-  width: 140px;
-  height: 130px;
-  padding: 20px;
+  width: 170px;
+  height: 145px;
+  padding: 20px 55px;
   border: 1px solid #ccc;
   border-radius: 4px;
   transition: transform 0.3s ease; 
 }
-
+.product-img {
+  max-width: 56px;
+  max-height: 56px;
+}
 .products_cat:hover {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
+
+
 .categoryName {
-  font-size: 17px;
-  font-family: cursive;
-  font-weight: bold;
+  position: absolute;
+  bottom:  20px;
+  left: 0%;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--primary);
 }

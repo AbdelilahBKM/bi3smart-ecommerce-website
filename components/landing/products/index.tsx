@@ -56,17 +56,20 @@ function ProductList() {
     <div>
       <section className={Styles.products} id="products">
         <Title>Our Products</Title>
-        <div
-        className={Styles.categories}>
+        <div className={Styles.categories}>
           {categories.map((category, index) => (
             <div key={index} className={Styles.products_cat}>
-              <Image
-                src={categoryImages[category]}
-                width={140}
-                height={130}
-                key={index}
-                onClick={() => filterProductsByCategory(category)}
-              />
+              <div className={Styles.centerImage}>
+                <Image
+                  src={categoryImages[category]}
+                  width={56}
+                  height={56}
+                  key={index}
+                  className={Styles["product-img"]}
+                  onClick={() => filterProductsByCategory(category)}
+                />
+              </div>
+              <div className={Styles.categoryName}>{category}</div>
             </div>
           ))}
         </div>
