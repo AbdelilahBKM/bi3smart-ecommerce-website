@@ -50,7 +50,7 @@ function ProductList() {
   const filterProductsByCategory = (category: string) => {
     setSelectedCategory(category);
     setSearchQuery("");
-    filterProducts(selectedCategory, searchQuery);
+    filterProducts(category, searchQuery); // Pass category instead of selectedCategory
   };
 
   const filterProducts = (category: string | null, query: string) => {
@@ -59,9 +59,10 @@ function ProductList() {
       filtered = filtered.filter((product) => product.category === category);
     }
     if (query) {
+      const lowercaseQuery = query.toLowerCase(); // Convert the query to lowercase
       filtered = filtered.filter((product) =>
-        product.title.toLowerCase().includes(query.toLowerCase())
-      );
+        product.title.toLowerCase().includes(lowercaseQuery)
+      ); // Convert the product title to lowercase before comparison
     }
     setSearchedProducts(filtered);
   };
