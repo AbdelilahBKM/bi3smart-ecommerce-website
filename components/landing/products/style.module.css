@@ -196,3 +196,34 @@
   font-size: 1rem;
   color: var(--primary);
 }
+
+/* style.module.css */
+
+.searchBarContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center horizontally */
+  margin-bottom: 20px;
+}
+
+.searchBar {
+  padding: 8px;
+  border: 1px solid #ced4da; /* Use Bootstrap border color */
+  border-radius: 5px 0 0 5px;
+  font-size: 14px;
+  outline: none;
+}
+
+.searchButton {
+  padding: 8px 15px;
+  border: 1px solid #007bff;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  background-color: #0056b3;
+}
