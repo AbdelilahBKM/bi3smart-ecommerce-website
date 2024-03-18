@@ -162,22 +162,25 @@
   background: #007aff;
 }
 
+.categories {
+  display: flex;
+  justify-content: space-evenly;
+  border-bottom: 1px solid #ccc;
+  padding: 40px;
+}
+
 .products_cat {
   cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 14px 18px 2px;
   width: 140px;
   height: 130px;
-  border-radius: 20px;
-  transition: transform 0.3s ease; /* Adding transition for smooth effect */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: transform 0.3s ease; 
 }
 
 .products_cat:hover {
-  box-shadow: rgba(0, 0, 0, 0.6) 0px 20px 24px 2px;
-  transform: scale(1.05); /* Adjusted shadow on hover */
-}
-
-.products_catIMG {
-  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 .categoryName {
