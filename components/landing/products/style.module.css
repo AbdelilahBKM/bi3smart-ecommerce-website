@@ -200,6 +200,7 @@
 /* style.module.css */
 
 .searchBarContainer {
+  margin-top: 50px;
   display: flex;
   align-items: center;
   justify-content: center; /* Center horizontally */
@@ -217,13 +218,44 @@
 .searchButton {
   padding: 8px 15px;
   border: 1px solid #007bff;
-  background-color: #007bff;
+  background-color: var(--secondary);
+
   color: #fff;
   border-radius: 0 5px 5px 0;
   font-size: 14px;
   cursor: pointer;
 }
 
-.searchButton:hover {
-  background-color: #0056b3;
+.searchButton:hover,
+.goButton:hover {
+  opacity: 0.8;
+}
+
+.priceFilter {
+  display: flex;
+  align-items: center;
+}
+
+.priceInput {
+  width: 90px;
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.priceSeparator {
+  margin-right: 10px;
+}
+
+.goButton {
+  padding: 5px 10px;
+  background-color: var(--secondary);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdownButton {
+  font-family: var(--Montserrat);
+  margin-right: 5px;
 }
