@@ -3,7 +3,7 @@ import * as React from "react";
 interface props {
   children: React.ReactNode;
 }
-
+//s
 interface imageInterface {
   src: string;
   alt: string;

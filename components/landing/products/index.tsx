@@ -25,13 +25,16 @@ function ProductList() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchedProducts, setSearchedProducts] = useState<Products[]>([]);
+  const [minPrice, setMinPrice] = useState<number | null>(null);
+  const [maxPrice, setMaxPrice] = useState<number | null>(null);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
     axios
       .get("https://fakestoreapi.com/products")
       .then((response) => {
         setProducts(response.data);
-        setSearchedProducts(response.data); // Initialize searched products with all products
+        setSearchedProducts(response.data);
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
@@ -49,20 +52,30 @@ function ProductList() {
 
   const filterProductsByCategory = (category: string) => {
     setSelectedCategory(category);
-    setSearchQuery("");
-    filterProducts(category, searchQuery); // Pass category instead of selectedCategory
+    filterProducts(category, searchQuery, minPrice, maxPrice);
   };
 
-  const filterProducts = (category: string | null, query: string) => {
-    let filtered = products;
+  const filterProducts = (
+    category: string | null,
+    query: string,
+    minPrice: number | null,
+    maxPrice: number | null
+  ) => {
+    let filtered = [...products];
     if (category) {
       filtered = filtered.filter((product) => product.category === category);
     }
     if (query) {
-      const lowercaseQuery = query.toLowerCase(); // Convert the query to lowercase
+      const lowercaseQuery = query.toLowerCase();
       filtered = filtered.filter((product) =>
         product.title.toLowerCase().includes(lowercaseQuery)
-      ); // Convert the product title to lowercase before comparison
+      );
+    }
+    if (minPrice !== null) {
+      filtered = filtered.filter((product) => product.price >= minPrice);
+    }
+    if (maxPrice !== null) {
+      filtered = filtered.filter((product) => product.price <= maxPrice);
     }
     setSearchedProducts(filtered);
   };
@@ -73,8 +86,38 @@ function ProductList() {
     setSearchQuery(event.target.value);
   };
 
+  const handleMinPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(event.target.value);
+    setMinPrice(isNaN(value) ? null : value);
+  };
+
+  const handleMaxPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(event.target.value);
+    setMaxPrice(isNaN(value) ? null : value);
+  };
+
   const handleSearch = () => {
-    filterProducts(selectedCategory, searchQuery);
+    filterProducts(selectedCategory, searchQuery, minPrice, maxPrice);
+  };
+
+  const handleGoButtonClick = () => {
+    filterProducts(selectedCategory, searchQuery, minPrice, maxPrice);
+  };
+
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortOrder(event.target.value as "asc" | "desc");
+    sortProducts(event.target.value as "asc" | "desc");
+  };
+
+  const sortProducts = (order: "asc" | "desc") => {
+    const sorted = [...searchedProducts].sort((a, b) => {
+      if (order === "asc") {
+        return a.price - b.price;
+      } else {
+        return b.price - a.price;
+      }
+    });
+    setSearchedProducts(sorted);
   };
 
   return (
@@ -113,6 +156,39 @@ function ProductList() {
           <button onClick={handleSearch} className={Styles.searchButton}>
             Search
           </button>
+        </div>
+        <div className={(Styles.priceFilter, Styles.searchBarContainer)}>
+          <input
+            type="number"
+            value={minPrice || ""}
+            onChange={handleMinPriceChange}
+            placeholder="Min Price"
+            className={Styles.priceInput}
+          />
+          <span className={Styles.priceSeparator}>-</span>
+          <input
+            type="number"
+            value={maxPrice || ""}
+            onChange={handleMaxPriceChange}
+            placeholder="Max Price"
+            className={Styles.priceInput}
+          />
+          <button onClick={handleGoButtonClick} className={Styles.goButton}>
+            Go
+          </button>
+        </div>
+        <div>
+          <label htmlFor="sort" className={Styles.dropdownButton}>
+            Sort by Price:
+          </label>
+          <select
+            id="sort"
+            onChange={handleSortChange}
+            className={Styles.dropdownContent}
+          >
+            <option value="asc">Low to High</option>
+            <option value="desc">High to Low</option>
+          </select>
         </div>
         <div className={`flex ${Styles.products__container}`}>
           {searchedProducts.map((product) => (
