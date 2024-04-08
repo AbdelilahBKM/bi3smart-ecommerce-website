@@ -12,9 +12,7 @@ const Hero = () => {
           <br />
           <span>on everything</span>
         </h1>
-        <p className={Styles.introduction__text}>
-          check out the latest sales!
-        </p>
+        <p className={Styles.introduction__text}>check out the latest sales!</p>
         <button className="btn-primary text-bold">
           <Link href="/#products">
             <a>shop now</a>
