@@ -3,11 +3,19 @@ import Style from "./style.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import formImage from "../../public/assets/images/form-image.png";
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../../store/authReducer";
+import  type { RootState } from "../../store/rootReducer";
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,8 +28,9 @@ export default function Login() {
         body: JSON.stringify({ email, password }),
       });
       if (response.ok) {
-        console.log("Login successful");
-        // Redirect user or perform any action after successful login
+        const data = await response.json();
+        const token = data.token;
+        dispatch(login(token));
       } else {
         const data = await response.json();
         setError(data.error || "An error occurred during login.");
@@ -44,48 +53,64 @@ export default function Login() {
         />
       </div>
       <div className={Style.form}>
-        <div className={Style.container}>
+        {!isAuthenticated ? (
+          <div className={Style.container}>
+            <div className={Style["form-header"]}>
+              <h2>Login to exclusive</h2>
+              <p>Enter your details below</p>
+            </div>
+            <form className={Style["register-form"]} onSubmit={handleLogin}>
+              <div className={Style["form__group"]}>
+                <input
+                  className={Style["form__field"]}
+                  placeholder="Email Address"
+                  type="text"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className={Style["form__group"]}>
+                <input
+                  className={Style["form__field"]}
+                  placeholder="Password"
+                  type="password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className={Style["form__group"]}>
+                <input
+                  className={Style["form__field"]}
+                  type="submit"
+                  value="Login"
+                />
+              </div>
+              {error && <p className={Style.error}>{error}</p>}
+            </form>
+            <div className={Style.link}>
+              Don&apos;t have an Account?
+              <span className={Style.login}>
+                <Link href={"/register"}>Register</Link>
+              </span>
+            </div>
+          </div>
+        ) : (
           <div className={Style["form-header"]}>
-            <h2>Login to exclusive</h2>
-            <p>Enter your details below</p>
+            <h2>Welcome back!</h2>
+            <p>You have successfully logged in.</p>
+            <div className={Style["register-form"]}>
+              <Link href={"/"}>
+                <input
+                  className={Style["form__field"]}
+                  type="submit"
+                  value="Go Back"
+                />
+              </Link>
+            </div>
           </div>
-          <form className={Style["register-form"]} onSubmit={handleLogin}>
-            <div className={Style["form__group"]}>
-              <input
-                className={Style["form__field"]}
-                placeholder="Email Address"
-                type="text"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className={Style["form__group"]}>
-              <input
-                className={Style["form__field"]}
-                placeholder="Password"
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div className={Style["form__group"]}>
-              <input
-                className={Style["form__field"]}
-                type="submit"
-                value="Login"
-              />
-            </div>
-            {error && <p className={Style.error}>{error}</p>}
-          </form>
-          <div className={Style.link}>
-            Don&apos;t have an Account?
-            <span className={Style.login}>
-              <Link href={"/register"}>Register</Link>
-            </span>
-          </div>
-        </div>
+        )}
       </div>
     </main>
   );

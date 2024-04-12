@@ -48,8 +48,8 @@ const Product = ({ image, name, price }: props) => {
             src={image.src}
             alt={image.alt}
             className={Style.product__image}
-            width={120}
-            height={150}
+            width={150}
+            height={120}
           />
         </div>
         <div className={`flex ${Style.product__price__container}`}>

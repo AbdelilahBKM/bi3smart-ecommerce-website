@@ -1,10 +1,10 @@
 import { NextPage } from "next";
-import Register from "../components/register";
+import MyAccount from "../components/myAccount";
 
 const ShoppingCard: NextPage = () => {
   return (
     <>
-      <Register />
+      <MyAccount />
     </>
   );
 };
