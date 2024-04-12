@@ -59,6 +59,12 @@
   top: -20%;
   right: -50%;
 }
+
+.miniNav {
+  display: flex;
+  gap: 20px;
+}
+
 @media (max-width: 972px) {
   .nav__list {
     display: none;
@@ -85,9 +91,13 @@
     padding: 0;
   }
 }
+
 @media (max-width: 716px) {
   .nav {
     padding-inline: 2rem;
+  }
+  .miniNav {
+    flex-direction: column;
   }
 }
 @media (max-width: 402px) {

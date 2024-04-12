@@ -1,28 +1,31 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import logo from "../../../../public/assets/images/logo.png";
+import Router, { useRouter } from "next/router";
 import shopCard from "../../../../public/assets/images/shopCard.svg";
 import Hamburger from "../../hamburger";
 import Styles from "./style.module.css";
 import { useProductContext } from "../../../../context/productContext";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../../../store/rootReducer";
+import { logout } from "../../../../store/authReducer";
 
 const Header = () => {
+  const router =  useRouter();
+  const dispatch = useDispatch();
   const [showNavBar, setShowNavBar] = React.useState(false);
   const { products } = useProductContext();
-  const router = useRouter();
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+  const token = useSelector((state: RootState) => state.auth.token);
+  console.log("token: " + token);
+
   return (
     <header className={Styles.header}>
       <nav className={Styles.nav}>
         <Link href="/">
           <a>
-            {/* <Image
-              src={logo}
-              alt="the website logo"
-              width={250}
-              height={43.31}
-            /> */}
             <p className={`${Styles.logo}`}>
               <span className={`${Styles.red}`}>BI3</span>-SMART
             </p>
@@ -56,9 +59,23 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link href="/register">
-              <a className={Styles.nav__link}>Join now</a>
-            </Link>
+            {isAuthenticated ? (
+              <div className={Styles.miniNav}>
+                <Link href="/myAccount">
+                  <a className={Styles.nav__link}>My account</a>
+                </Link>
+                <Link href="">
+                  <a onClick={() => {
+                      dispatch(logout());
+                      router.push("/");
+                  }} className={Styles.nav__link}>Logout</a>
+                </Link>
+              </div>
+            ) : (
+              <Link href="/register">
+                <a className={Styles.nav__link}>Join now</a>
+              </Link>
+            )}
           </li>
           <li className={Styles.shopping__card}>
             <Link href="/checkout">

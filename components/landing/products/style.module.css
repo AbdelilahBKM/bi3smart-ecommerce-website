@@ -1,5 +1,6 @@
 .products {
   padding: 5rem 7rem;
+  background: #f7f8f9;
 }
 .products__container {
   flex-wrap: wrap;
@@ -12,13 +13,14 @@
   border: 1px solid transparent;
   position: relative;
   overflow: hidden;
-  width: 30%;
+  width: 20%;
+  margin: 10px auto;
 }
 .product__container {
   overflow: hidden;
 }
 .product__image__container {
-  background-color: #f7f8f9;
+  background-color: #fff;
   border: 1px solid transparent;
   border-radius: 15px;
   align-items: center;
@@ -35,14 +37,20 @@
   -webkit-transform: scale(1.2, 1.2);
   transform: scale(1.1, 1.1);
 }
+.product__image {
+  width: auto;
+  height: auto;
+}
 
 .product__price__container {
+  flex-direction: column;
   overflow: hidden;
   padding: 1.5rem 2rem 2rem 2rem;
   justify-content: space-between;
 }
 .product__name,
 .product__price {
+  text-align: center;
   color: var(--primary);
   font-family: var(--Montserrat);
   font-size: 1.1rem;
@@ -208,21 +216,23 @@
 }
 
 .searchBar {
-  padding: 8px;
+  padding: 8px 10px;
   border: 1px solid #ced4da; /* Use Bootstrap border color */
-  border-radius: 5px 0 0 5px;
-  font-size: 14px;
+  font-size: 18px;
   outline: none;
+  height: 52px;
+  width: 75%;
 }
 
 .searchButton {
   padding: 8px 15px;
-  border: 1px solid #007bff;
+  border: 0;
   background-color: var(--secondary);
+  height: 52px;
+  width: 10%;
 
   color: #fff;
-  border-radius: 0 5px 5px 0;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -237,13 +247,15 @@
 }
 
 .priceInput {
-  width: 90px;
-  margin-right: 10px;
+  width: 25%;
+  height: 52px;
+  margin-right: 0;
   padding: 5px;
+  border: 1px solid #ced4da;
 }
 
 .priceSeparator {
-  margin-right: 10px;
+  margin: 10px;
 }
 
 .goButton {
@@ -251,11 +263,59 @@
   background-color: var(--secondary);
   color: #fff;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
+  height: 52px;
+  width: 100px;
 }
 
 .dropdownButton {
   font-family: var(--Montserrat);
   margin-right: 5px;
+  font-size: 1.2rem;
+  
+}
+
+/* Add this CSS to your stylesheet */
+.dropdownContent {
+  /* Define styles for the dropdown button */
+  padding: 8px 16px; /* Adjust padding as needed */
+  font-size: 1.2rem; /* Adjust font size as needed */
+  border-radius: 4px; /* Add border radius */
+  background-color: transparent; /* Set background color */
+  color: #333; /* Set text color */
+  cursor: pointer; /* Set cursor to pointer */
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.dropdownContent:hover {
+  background-color: #fff;
+  
+}
+
+/* Style the dropdown arrow */
+.dropdownContent::after {
+  content: '\25BC'; /* Unicode character for downward arrow */
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  border: none;
+}
+
+/* Apply styles when the dropdown is open */
+.dropdownContent:focus {
+  outline: none; /* Remove default focus outline */
+  border-radius: 0;
+}
+
+.dropdownContent .option {
+  font-size: 1.2rem; /* Example: Set font size */
+  color: #333; /* Example: Set text color */
+  background-color: #fff; /* Example: Set background color */
+  padding: 16px; /* Example: Set padding */
+  border-radius: none;
+  border: none;
+  background-color: transparent;
+
 }

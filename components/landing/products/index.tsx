@@ -14,8 +14,8 @@ interface CategoryImages {
 
 const categoryImages: CategoryImages = {
   1: "/assets/images/monitor.png",
-  2: "/assets/images/man.png",
-  3: "/assets/images/necklace.png",
+  3: "/assets/images/man.png",
+  2: "/assets/images/necklace.png",
   4: "/assets/images/woman.png",
 };
 
@@ -191,8 +191,8 @@ function ProductList() {
             onChange={handleSortChange}
             className={Styles.dropdownContent}
           >
-            <option value="asc">Low to High</option>
-            <option value="desc">High to Low</option>
+            <option className={Styles.option} value="asc">Low to High</option>
+            <option className={Styles.option} value="desc">High to Low</option>
           </select>
         </div>
         <div className={`flex ${Styles.products__container}`}>

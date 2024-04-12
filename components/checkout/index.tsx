@@ -4,6 +4,8 @@ import StripeCheckout from "react-stripe-checkout";
 import { useRouter } from "next/router";
 import Product from "./product";
 import { useProductContext } from "../../context/productContext";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/rootReducer";
 
 interface imageInterface {
   src: string;
@@ -16,10 +18,18 @@ interface productInterface {
   amount: string;
 }
 const CheckOut = () => {
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated); 
   //const [products,setProducts] = React.useState<productInterface[]>([])
   const { products, setProducts } = useProductContext();
   const [total, setTotal] = React.useState(0);
+  const router = useRouter();
+
+
   React.useEffect(() => {
+    if(!isAuthenticated){
+      router.push("/register");
+      return;
+    }
     const productsPrice = products.map((product) =>
       Number(
         product.price
@@ -34,7 +44,7 @@ const CheckOut = () => {
       : 0;
     setTotal(total);
   }, [products.length]);
-  const router = useRouter();
+  
 
   const handleRemoveProduct = (idx: number) => {
     const restProducts = products.filter((_, index) => index !== idx);
