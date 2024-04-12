@@ -7,6 +7,7 @@ import Contact from "../components/landing/contact";
 import Layout from "../components/common/layout";
 import { ProductContext } from "../context/productContext";
 import SEO from "../components/common/SEO";
+import ChatInterface from "../components/landing/chat/ChatInterface";
 
 const Home: NextPage = () => {
   return (
@@ -19,6 +20,7 @@ const Home: NextPage = () => {
           <Products />
           <Subscribe />
           <Contact />
+          <ChatInterface />
         </Layout>
       </ProductContext>
     </>
