@@ -1,0 +1,99 @@
+.chatContainer {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-family: var(--Montserrat);
+}
+
+.chatHeader {
+  padding: 10px;
+  background-color: green;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatClose {
+  cursor: pointer;
+}
+
+.chatToggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  font-size: 24px;
+  color: white;
+  background-color: green;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.chatToggle:hover {
+  background-color: darkgreen;
+}
+
+.messagesList {
+  flex-grow: 1;
+  overflow-y: auto;
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+}
+
+.message {
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 4px;
+  word-break: break-word;
+}
+
+.user {
+  align-self: flex-end;
+  background-color: #dcf8c6;
+}
+
+.bot {
+  align-self: flex-start;
+  background-color: #f0f0f0;
+}
+
+.messageForm {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.messageInput {
+  flex-grow: 1;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: var(--Montserrat);
+}
+
+.sendButton {
+  padding: 10px 15px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sendButton:hover {
+  background-color: darkgreen;
+}
