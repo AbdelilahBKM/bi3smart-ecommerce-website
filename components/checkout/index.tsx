@@ -12,13 +12,16 @@ interface imageInterface {
   alt: string;
 }
 interface productInterface {
+  id: number;
   image: imageInterface;
   name: string;
   price: string;
   amount: string;
 }
 const CheckOut = () => {
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated); 
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const token = isAuthenticated ? useSelector((state: RootState) => state.auth.token) : null;
+  const [clientId, setClientId] = React.useState<number>(-1);
   //const [products,setProducts] = React.useState<productInterface[]>([])
   const { products, setProducts } = useProductContext();
   const [total, setTotal] = React.useState(0);
@@ -30,6 +33,8 @@ const CheckOut = () => {
       router.push("/register");
       return;
     }
+
+    setClientId(token? token.client_id : -1);
     const productsPrice = products.map((product) =>
       Number(
         product.price
@@ -65,7 +70,19 @@ const CheckOut = () => {
     localStorage.setItem("products", JSON.stringify(restProducts));
   };
 
-  const onToken = () => {
+  const onToken = async () => {
+    // cree commande:
+    try{
+      await products.map(async (product) => {
+        const response = await fetch(`http://127.0.0.1:8000/api/commandes/`, {
+          method: "POST",
+
+        });
+      });
+
+    }catch(error){
+      console.error("erreur creation Commande: ", error);
+    }
     localStorage.setItem("products", JSON.stringify([]));
     router.push("/congratulation");
   };
@@ -93,6 +110,7 @@ const CheckOut = () => {
         <tbody>
           {products.map((product, index) => (
             <Product
+              id={product.id}
               name={product.name}
               setTotal={setTotal}
               image={product.image}

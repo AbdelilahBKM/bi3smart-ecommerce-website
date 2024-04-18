@@ -9,6 +9,7 @@ interface imageInterface {
   alt: string;
 }
 interface productsInterface {
+  id: number;
   name: string;
   amount: number;
   image: imageInterface;

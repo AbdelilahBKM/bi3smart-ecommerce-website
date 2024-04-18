@@ -11,25 +11,27 @@ interface props {
   image: imageInterface;
   name: string;
   price: string;
+  id: number;
 }
 
 interface productInterface {
+  id: number;
   image: imageInterface;
   name: string;
   price: string;
   amount: number;
 }
 
-const Product = ({ image, name, price }: props) => {
+const Product = ({ image, name, price, id }: props) => {
   const { setProducts } = useProductContext();
-  const handleAddCard = ({ name, image, price }: props) => {
+  const handleAddCard = ({ name, image, price, id }: props) => {
     const data: any = localStorage.getItem("products");
     if (data === null) {
       const newProducts: string = JSON.stringify([
-        { name, image, price, amount: 1 },
+        { name, image, price, amount: 1, id },
       ]);
       localStorage.setItem("products", newProducts);
-      setProducts([{ name, image, price, amount: 1 }]);
+      setProducts([{ id, name, image, price, amount: 1 }]);
     } else {
       const newProducts: string = JSON.stringify([
         ...JSON.parse(data),
@@ -62,13 +64,13 @@ const Product = ({ image, name, price }: props) => {
           <div className={Style["product__btn__container--no-opacity"]}>
             <button
               className={`btn-primary-round ${Style.product__btn} `}
-              onClick={(_) => handleAddCard({ name, image, price })}
+              onClick={(_) => handleAddCard({ name, image, price, id })}
             >
               add to cart
             </button>
             <button
               className={`btn-secondary-round ${Style.product__btn}`}
-              onClick={(_) => handleAddCard({ name, image, price })}
+              onClick={(_) => handleAddCard({ name, image, price, id })}
             >
               <Link href="/checkout">
                 <a>buy now</a>
