@@ -20,7 +20,7 @@ interface productInterface {
 }
 const CheckOut = () => {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-  const token = isAuthenticated ? useSelector((state: RootState) => state.auth.token) : null;
+  const token = useSelector((state: RootState) => state.auth.token);
   const [clientId, setClientId] = React.useState<number>(-1);
   //const [products,setProducts] = React.useState<productInterface[]>([])
   const { products, setProducts } = useProductContext();
@@ -73,12 +73,41 @@ const CheckOut = () => {
   const onToken = async () => {
     // cree commande:
     try{
-      await products.map(async (product) => {
-        const response = await fetch(`http://127.0.0.1:8000/api/commandes/`, {
+      const response = await fetch(`http://127.0.0.1:8000/api/commandes/`, {
           method: "POST",
-
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            client: clientId,
+            montant_total: total
+          })
         });
-      });
+        if(response.ok){
+          const command: {
+            id_comm: number,
+            date_comm: Date,
+            client: number
+          } = await response.json();
+          await products.map(async (product) => {
+            const response = await fetch(`http://127.0.0.1:8000/api/ligne_commandes/`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                id_comm: command.id_comm,
+                id_prod: product.id,
+                Quantite: product.amount
+              })
+            });
+            if(response.ok){
+              console.log("LIGNE COMMAND CREE ");
+              // SALINA HNA
+            }
+          });
+        }
+
 
     }catch(error){
       console.error("erreur creation Commande: ", error);
