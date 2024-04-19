@@ -49,7 +49,7 @@ function ProductList() {
         console.error("Error fetching categories:", error);
       });
 
-      console.log(products, categories)
+    console.log(products, categories);
   }, []);
 
   const filterProductsByCategory = (category: number) => {
@@ -145,7 +145,9 @@ function ProductList() {
                   />
                 </div>
 
-                <div className={Styles.categoryName}>{category.nom_categorie}</div>
+                <div className={Styles.categoryName}>
+                  {category.nom_categorie}
+                </div>
               </div>
             );
           })}
@@ -191,14 +193,19 @@ function ProductList() {
             onChange={handleSortChange}
             className={Styles.dropdownContent}
           >
-            <option className={Styles.option} value="asc">Low to High</option>
-            <option className={Styles.option} value="desc">High to Low</option>
+            <option className={Styles.option} value="asc">
+              Low to High
+            </option>
+            <option className={Styles.option} value="desc">
+              High to Low
+            </option>
           </select>
         </div>
         <div className={`flex ${Styles.products__container}`}>
           {searchedProducts.map((product) => (
             <Product
               key={product.id}
+              id={product.id}
               image={{ src: product.image, alt: "" }}
               name={product.title}
               price={`${product.price}$`}

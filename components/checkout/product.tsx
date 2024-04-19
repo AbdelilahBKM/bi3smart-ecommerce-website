@@ -6,6 +6,7 @@ interface imageInterface {
   alt: string;
 }
 interface props {
+  id: number;
   image: imageInterface;
   name: string;
   price: string;
@@ -15,6 +16,7 @@ interface props {
 }
 
 const Product = ({
+  id,
   name,
   image,
   price,
@@ -50,6 +52,7 @@ const Product = ({
           <Image src={image.src} alt={image.alt} height={100} width={100} />
         </div>
         <div className={Styles.shoppingCart__product__name__container}>
+          <p>id {id}</p>
           <p>{name}</p>
           <button
             className={Styles.shoppingCart__product__btn}
