@@ -6,20 +6,13 @@ import Product from "./product";
 import { useProductContext } from "../../context/productContext";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/rootReducer";
+import { METHODS } from "http";
+import { redirect } from "next/dist/server/api-utils";
 
-interface imageInterface {
-  src: string;
-  alt: string;
-}
-interface productInterface {
-  id: number;
-  image: imageInterface;
-  name: string;
-  price: string;
-  amount: string;
-}
 const CheckOut = () => {
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
   const token = useSelector((state: RootState) => state.auth.token);
   const [clientId, setClientId] = React.useState<number>(-1);
   //const [products,setProducts] = React.useState<productInterface[]>([])
@@ -27,14 +20,13 @@ const CheckOut = () => {
   const [total, setTotal] = React.useState(0);
   const router = useRouter();
 
-
   React.useEffect(() => {
-    if(!isAuthenticated){
+    if (!isAuthenticated) {
       router.push("/register");
       return;
     }
 
-    setClientId(token? token.client_id : -1);
+    setClientId(token ? token.client_id : -1);
     const productsPrice = products.map((product) =>
       Number(
         product.price
@@ -49,7 +41,6 @@ const CheckOut = () => {
       : 0;
     setTotal(total);
   }, [products.length]);
-  
 
   const handleRemoveProduct = (idx: number) => {
     const restProducts = products.filter((_, index) => index !== idx);
@@ -71,50 +62,70 @@ const CheckOut = () => {
   };
 
   const onToken = async () => {
-    // cree commande:
-    try{
+    // Create order:
+    try {
       const response = await fetch(`http://127.0.0.1:8000/api/commandes/`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            client: clientId,
-            montant_total: total
-          })
-        });
-        if(response.ok){
-          const command: {
-            id_comm: number,
-            date_comm: Date,
-            client: number
-          } = await response.json();
-          await products.map(async (product) => {
-            const response = await fetch(`http://127.0.0.1:8000/api/ligne_commandes/`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                id_comm: command.id_comm,
-                id_prod: product.id,
-                Quantite: product.amount
-              })
-            });
-            if(response.ok){
-              console.log("LIGNE COMMAND CREE ");
-              // SALINA HNA
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          client: clientId,
+          montant_total: total,
+        }),
+      });
+      if (response.ok) {
+        const command: {
+          id_comm: number;
+          date_comm: Date;
+          client: number;
+          montant_total: number;
+        } = await response.json();
+        await Promise.all(
+          products.map(async (product) => {
+            console.log(product);
+            const response1 = await fetch(
+              `http://127.0.0.1:8000/api/produits/${product.name}`,
+              {
+                method: "GET",
+              }
+            );
+            if (response1.ok) {
+              const productData = await response1.json();
+              const product_id = productData.product_id;
+              const response2 = await fetch(
+                `http://127.0.0.1:8000/api/ligne_commandes/`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    id_comm: command.id_comm,
+                    id_prod: product_id,
+                    Quantite: product.amount,
+                  }),
+                }
+              );
+              if (response2.ok) {
+                console.log("LIGNE COMMAND CREE ");
+              } else {
+                throw new Error("Failed to create line command.");
+              }
             }
-          });
-        }
-
-
-    }catch(error){
-      console.error("erreur creation Commande: ", error);
+          })
+        );
+        localStorage.setItem("products", JSON.stringify([]));
+        router.push("/congratulation");
+        
+      } else {
+        throw new Error("Failed to create order.");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
     }
-    localStorage.setItem("products", JSON.stringify([]));
-    router.push("/congratulation");
   };
+
   if (products.length === 0) {
     return (
       <section className={Styles.shoppingCart}>
