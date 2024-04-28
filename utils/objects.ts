@@ -9,7 +9,8 @@ export interface Products {
 
 export interface Categorie {
   Id_categorie: number,
-  nom_categorie: string
+  nom_categorie: string,
+  image_categorie: string
 }
 
 export interface Client {

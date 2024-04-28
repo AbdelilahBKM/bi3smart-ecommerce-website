@@ -8,16 +8,6 @@ import Title from "../../common/Title";
 import Image from "next/image";
 import { Products, Categorie } from "../../../utils/objects";
 
-interface CategoryImages {
-  [key: string]: string;
-}
-
-const categoryImages: CategoryImages = {
-  1: "/assets/images/monitor.png",
-  3: "/assets/images/man.png",
-  2: "/assets/images/necklace.png",
-  4: "/assets/images/woman.png",
-};
 
 function ProductList() {
   const [products, setProducts] = useState<Products[]>([]);
@@ -138,7 +128,7 @@ function ProductList() {
               >
                 <div className={Styles.centerImage}>
                   <Image
-                    src={categoryImages[id_categorie]}
+                    src={category.image_categorie}
                     width={130}
                     height={130}
                     className={Styles["product-img"]}
