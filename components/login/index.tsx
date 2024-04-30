@@ -15,7 +15,8 @@ export default function Login() {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
-  );
+  );  
+
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,6 +32,7 @@ export default function Login() {
         const data = await response.json();
         const token = data.token;
         dispatch(login(token));
+
       } else {
         const data = await response.json();
         setError(data.error || "An error occurred during login.");

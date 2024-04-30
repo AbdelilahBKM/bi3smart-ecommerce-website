@@ -12,6 +12,7 @@ interface Message {
   sender: "user" | "bot";
 }
 
+
 const ChatInterface = () => {
   const [userInput, setUserInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
@@ -26,6 +27,7 @@ const ChatInterface = () => {
       text: userInput,
       sender: "user",
     };
+   
 
     setMessages((prevMessages) => [...prevMessages, newMessage]);
 
@@ -53,6 +55,15 @@ const ChatInterface = () => {
 
     setUserInput("");
   };
+
+  React.useEffect(() => {
+    const startChatBot = async () => {
+      const response = await fetch("http://127.0.0.1:8000/api/chat/firstPrompt/");
+      return response.ok
+    }
+
+    startChatBot();
+  }, [messages])
 
   return (
     <>
