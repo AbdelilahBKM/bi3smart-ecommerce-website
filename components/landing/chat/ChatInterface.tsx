@@ -1,9 +1,8 @@
-// components/ChatInterface.tsx
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocketchat } from "@fortawesome/free-brands-svg-icons";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import Style from "./style.module.css";
 
 interface Message {
@@ -12,11 +11,21 @@ interface Message {
   sender: "user" | "bot";
 }
 
-
 const ChatInterface = () => {
   const [userInput, setUserInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isVisible, setIsVisible] = useState(false);
+  const messagesEndRef = useRef<HTMLUListElement>(null);
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +36,6 @@ const ChatInterface = () => {
       text: userInput,
       sender: "user",
     };
-   
 
     setMessages((prevMessages) => [...prevMessages, newMessage]);
 
@@ -56,15 +64,6 @@ const ChatInterface = () => {
     setUserInput("");
   };
 
-  React.useEffect(() => {
-    const startChatBot = async () => {
-      const response = await fetch("http://127.0.0.1:8000/api/chat/firstPrompt/");
-      return response.ok
-    }
-
-    startChatBot();
-  }, [messages])
-
   return (
     <>
       <button
@@ -80,10 +79,10 @@ const ChatInterface = () => {
             <FontAwesomeIcon
               onClick={() => setIsVisible(false)}
               className={Style.chatClose}
-              icon={faXmark}
+              icon={faTimes}
             />
           </div>
-          <ul className={Style.messagesList}>
+          <ul ref={messagesEndRef} className={Style.messagesList}>
             {messages.map((message) => (
               <li
                 key={message.id}

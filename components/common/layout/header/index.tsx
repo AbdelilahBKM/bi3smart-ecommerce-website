@@ -11,7 +11,7 @@ import { RootState } from "../../../../store/rootReducer";
 import { logout } from "../../../../store/authReducer";
 
 const Header = () => {
-  const router =  useRouter();
+  const router = useRouter();
   const dispatch = useDispatch();
   const [showNavBar, setShowNavBar] = React.useState(false);
   const { products } = useProductContext();
@@ -53,11 +53,7 @@ const Header = () => {
               <a className={Styles.nav__link}>contact</a>
             </Link>
           </li>
-          <li>
-            <Link href="/#about">
-              <a className={Styles.nav__link}>about</a>
-            </Link>
-          </li>
+
           <li>
             {isAuthenticated ? (
               <div className={Styles.miniNav}>
@@ -65,10 +61,15 @@ const Header = () => {
                   <a className={Styles.nav__link}>My account</a>
                 </Link>
                 <Link href="">
-                  <a onClick={() => {
+                  <a
+                    onClick={() => {
                       dispatch(logout());
                       router.push("/");
-                  }} className={Styles.nav__link}>Logout</a>
+                    }}
+                    className={Styles.nav__link}
+                  >
+                    Logout
+                  </a>
                 </Link>
               </div>
             ) : (
