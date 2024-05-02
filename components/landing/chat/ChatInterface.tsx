@@ -15,6 +15,7 @@ const ChatInterface = () => {
   const [userInput, setUserInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isVisible, setIsVisible] = useState(false);
+  const [isBotTyping, setIsBotTyping] = useState(false);
   const messagesEndRef = useRef<HTMLUListElement>(null);
 
   const scrollToBottom = () => {
@@ -30,6 +31,8 @@ const ChatInterface = () => {
   const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!userInput.trim()) return;
+
+    setIsBotTyping(true); // Set to true when sending message
 
     const newMessage: Message = {
       id: Date.now(),
@@ -50,6 +53,9 @@ const ChatInterface = () => {
 
       const data = await response.json();
 
+      // Simulate bot typing for a few seconds
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       const botResponse: Message = {
         id: Date.now() + 1,
         text: data.message,
@@ -61,7 +67,8 @@ const ChatInterface = () => {
       console.error("Failed to send message:", error);
     }
 
-    setUserInput("");
+    setIsBotTyping(false); // Set to false when response is received
+    setUserInput(""); // Clearing the input field
   };
 
   return (
@@ -92,6 +99,13 @@ const ChatInterface = () => {
               </li>
             ))}
           </ul>
+          {isBotTyping && (
+            <div className={Style.typingIndicator}>
+              <div className={Style.dot}></div>
+              <div className={Style.dot}></div>
+              <div className={Style.dot}></div>
+            </div>
+          )}
           <form onSubmit={sendMessage} className={Style.messageForm}>
             <input
               type="text"
