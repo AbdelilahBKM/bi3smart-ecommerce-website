@@ -9,15 +9,15 @@ const Footer = () => {
           <dt className={Styles.description__title}>Info</dt>
           <dd className={Styles.description__item}>
             <b className={Styles.description__item__name}>address: </b>
-            <span>3607 Carl Street, Dallas, TX, USA</span>
+            <span>Marrakech - Morocco</span>
           </dd>
           <dd className={Styles.description__item}>
             <b className={Styles.description__item__name}>telephone: </b>
-            <span>+1 214 717 4816</span>
+            <span>+212 5 23 14 12 36</span>
           </dd>
           <dd className={Styles.description__item}>
             <b className={Styles.description__item__name}>email: </b>
-            <span>whitehorse9021@gmail.com</span>
+            <span>Bi3Smart@gmail.com</span>
           </dd>
         </dl>
         <dl className={`flex ${Styles.description__list}`}>
